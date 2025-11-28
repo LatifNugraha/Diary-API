@@ -1,12 +1,12 @@
 from flask import Flask
 import pymysql
 from config import Config
-from database import db   # ✅ AMBIL db DARI SINI
+from database import db
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
-# ===== AUTO CREATE DATABASE =====
+# ===== BUAT DATABASE =====
 conn = pymysql.connect(
     host=Config.DB_HOST,
     user=Config.DB_USER,
@@ -22,7 +22,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 )
 db.init_app(app)
 
-# ===== IMPORT MODELS (SETELAH db.init_app) =====
+# ===== IMPORT MODELS =====
 from models.user import User
 from models.content import Content
 from models.mood import Mood
@@ -30,7 +30,7 @@ from models.tag import Tag
 from models.diary_entry import DiaryEntry
 from models.entry_tag import entry_tags
 
-# ===== AUTO CREATE TABLES =====
+# ===== BUAT TABLES =====
 with app.app_context():
     db.create_all()
 

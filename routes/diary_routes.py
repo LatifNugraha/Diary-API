@@ -10,7 +10,6 @@ def serialize_entry(obj):
     if obj is None:
         return None
     data = {c.name: getattr(obj, c.name) for c in obj.__table__.columns}
-    # include tags as list of tag ids and optionally tag names
     data["tag_ids"] = [t.id for t in obj.tags]
     data["tags"] = [{"id": t.id, "name": t.name} for t in obj.tags]
     return data

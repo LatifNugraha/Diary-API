@@ -12,5 +12,5 @@ class DiaryEntry(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
-    # relationship helpers
+    # Koneksi
     tags = db.relationship("Tag", secondary=entry_tags, backref=db.backref("entries", lazy="dynamic"))
